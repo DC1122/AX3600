@@ -7,9 +7,11 @@ sed -i "s?targets/%S/packages?targets/%S/$kernel_v?" include/feeds.mk
 
 echo "$(date +"%s")" >version.date
 sed -i '/$(curdir)\/compile:/c\$(curdir)/compile: package/opkg/host/compile' package/Makefile
-sed -i "s/DEFAULT_PACKAGES:=/DEFAULT_PACKAGES:=luci-app-advanced luci-app-firewall luci-app-gpsysupgrade luci-app-opkg luci-app-upnp luci-app-autoreboot \
+sed -i "s/DEFAULT_PACKAGES:=/DEFAULT_PACKAGES:=luci-app-advanced luci-app-firewall luci-app-opkg luci-app-upnp luci-app-autoreboot \
 luci-app-wizard luci-base luci-compat luci-lib-ipkg luci-lib-fs \
-coremark wget-ssl curl htop nano zram-swap kmod-lib-zstd kmod-tcp-bbr bash openssh-sftp-server block-mount /" include/target.mk
+coremark wget-ssl curl htop nano zram-swap kmod-lib-zstd kmod-tcp-bbr bash openssh-sftp-server block-mount \
+luci-app-accesscontrol luci-app-ddns batctl-full wpad-mesh-openssl luci-app-ramfree luci-app-wolplus bind-host \
+luci-app-adguardhome luci-app-vlmcsd luci-app-ttnode luci-app-easymesh/" include/target.mk
 sed -i "s/procd-ujail//" include/target.mk
 
 sed -i '/	refresh_config();/d' scripts/feeds
@@ -26,7 +28,7 @@ cd feeds/kiddin9; git pull; cd -
 
 mv -f feeds/kiddin9/{r81*,igb-intel,rtl8189es} tmp/
 
-sed -i "s/192.168.1/10.0.0/" package/feeds/kiddin9/base-files/files/bin/config_generate
+sed -i "s/192.168.1/192.168.31/" package/feeds/kiddin9/base-files/files/bin/config_generate
 
 (
 svn export --force https://github.com/coolsnowwolf/lede/trunk/tools/upx tools/upx
