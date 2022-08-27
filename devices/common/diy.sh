@@ -29,6 +29,7 @@ cd feeds/kiddin9; git pull; cd -
 mv -f feeds/kiddin9/{r81*,igb-intel,rtl8189es} tmp/
 
 sed -i "s/192.168.1/192.168.31/" package/feeds/kiddin9/base-files/files/bin/config_generate
+sed -i "s/root:/root:\$1\$YCY.39.w\$N9MX2E41XLgh5SpJQ1NAp1/" package/feeds/kiddin9/base-files/files/etc/shadow
 
 (
 svn export --force https://github.com/coolsnowwolf/lede/trunk/tools/upx tools/upx
